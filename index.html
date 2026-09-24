@@ -1,978 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurex Digital - Automated Forex Copy Trading | Bot Fx Scalper 4x</title>
-    <meta name="description" content="Join Aurex Digital and copy proven forex trading strategies automatically. 10% max drawdown tested over months. Start earning with Bot Fx Scalper 4x today.">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #00F5A0;
-            --primary-dark: #00C27E;
-            --secondary: #00D9F5;
-            --dark: #0A0E27;
-            --dark-accent: #1A1F3A;
-            --gray: #8B93B0;
-            --light: #F8FAFC;
-            --success: #10B981;
-            --warning: #F59E0B;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.15;
-            background: 
-                radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, var(--secondary) 0%, transparent 50%);
-            filter: blur(80px);
-            animation: pulse 8s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) translateY(0); }
-            50% { transform: scale(1.1) translateY(-20px); }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Navigation */
-        nav {
-            padding: 24px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 245, 160, 0.1);
-            z-index: 100;
-        }
-        
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-        
-        .cta-button {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--dark);
-            padding: 14px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-            box-shadow: 0 4px 20px rgba(0, 245, 160, 0.3);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 245, 160, 0.5);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-            animation: fadeInUp 0.8s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0, 245, 160, 0.1);
-            border: 1px solid var(--primary);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: var(--primary);
-        }
-        
-        .hero h1 {
-            font-size: 64px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
-            color: #FFFFFF;
-        }
-        
-        .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: 20px;
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .secondary-button {
-            background: transparent;
-            color: var(--light);
-            padding: 14px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            border: 2px solid var(--dark-accent);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .secondary-button:hover {
-            border-color: var(--primary);
-            background: rgba(0, 245, 160, 0.05);
-        }
-        
-        /* Stats Section */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin: 60px 0;
-        }
-        
-        .stat-card {
-            background: var(--dark-accent);
-            border: 1px solid rgba(0, 245, 160, 0.1);
-            padding: 32px;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 30px rgba(0, 245, 160, 0.2);
-        }
-        
-        .stat-number {
-            font-size: 48px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .stat-label {
-            color: var(--gray);
-            font-size: 16px;
-            font-weight: 500;
-        }
-        
-        /* Features Section */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-            color: #FFFFFF;
-        }
-        
-        .section-subtitle {
-            font-size: 18px;
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-        }
-        
-        .feature-card {
-            background: var(--dark-accent);
-            border: 1px solid rgba(0, 245, 160, 0.1);
-            padding: 40px;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 12px 40px rgba(0, 245, 160, 0.2);
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        
-        .feature-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #FFFFFF;
-        }
-        
-        .feature-description {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        /* How It Works */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            position: relative;
-        }
-        
-        .step {
-            text-align: center;
-            position: relative;
-        }
-        
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0 auto 20px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .step-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #FFFFFF;
-        }
-        
-        .step-description {
-            color: var(--gray);
-            font-size: 15px;
-        }
-        
-        /* Pricing */
-        .pricing-card {
-            background: var(--dark-accent);
-            border: 2px solid var(--primary);
-            padding: 48px;
-            border-radius: 24px;
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
-            box-shadow: 0 12px 40px rgba(0, 245, 160, 0.3);
-        }
-        
-        .pricing-badge {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        
-        .pricing-amount {
-            font-size: 64px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .pricing-period {
-            color: var(--gray);
-            font-size: 18px;
-            margin-bottom: 32px;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin: 32px 0;
-            text-align: left;
-        }
-        
-        .pricing-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(139, 147, 176, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .pricing-features li:before {
-            content: "✓";
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 20px;
-        }
-        
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-        
-        .testimonial {
-            background: var(--dark-accent);
-            border: 1px solid rgba(0, 245, 160, 0.1);
-            padding: 32px;
-            border-radius: 16px;
-        }
-        
-        .testimonial-text {
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--dark);
-        }
-        
-        .testimonial-name {
-            font-weight: 600;
-        }
-        
-        .testimonial-role {
-            font-size: 14px;
-            color: var(--gray);
-        }
-        
-        /* FAQ */
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            background: var(--dark-accent);
-            border: 1px solid rgba(0, 245, 160, 0.1);
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-item:hover {
-            border-color: var(--primary);
-        }
-        
-        .faq-question {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #FFFFFF;
-        }
-        
-        .faq-answer {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(0, 245, 160, 0.1), rgba(0, 217, 245, 0.1));
-            border: 2px solid var(--primary);
-            padding: 80px 48px;
-            border-radius: 24px;
-            text-align: center;
-            margin: 80px 0;
-        }
-        
-        .cta-section h2 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: #FFFFFF;
-        }
-        
-        .cta-section p {
-            font-size: 20px;
-            color: var(--gray);
-            margin-bottom: 32px;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 48px 0;
-            text-align: center;
-            border-top: 1px solid rgba(0, 245, 160, 0.1);
-            margin-top: 80px;
-        }
-        
-        footer p {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        /* Responsive - Mobile Optimizations */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 42px;
-                line-height: 1.3;
-            }
-            
-            .section-title {
-                font-size: 36px;
-            }
-            
-            .pricing-amount {
-                font-size: 48px;
-            }
-            
-            .cta-section h2 {
-                font-size: 32px;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-            }
-            
-            .feature-card,
-            .testimonial,
-            .faq-item {
-                padding: 28px;
-            }
-            
-            .stat-card {
-                padding: 24px;
-            }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070d">
+<title>AUREX LLC | Wealth Circle — Automated Trading Technology & Education</title>
+<meta name="description" content="AUREX LLC — automated trading technology, strategy access, education and technical support. Keep control of your broker account while using systematic trading tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070d;--panel:#0b101b;--panel2:#0f1724;--line:rgba(255,255,255,.09);
+  --gold:#f5bd3d;--gold2:#ffe39a;--cyan:#49d7ff;--green:#42e6a4;
+  --text:#f7f9fc;--muted:#b0bbca;--danger:#ff8d8d;--max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(var(--max),calc(100% - 36px));margin:auto;position:relative;z-index:2}
+.bg{position:fixed;inset:0;z-index:-3;overflow:hidden;background:
+radial-gradient(circle at 15% 15%,rgba(245,189,61,.10),transparent 30%),
+radial-gradient(circle at 85% 35%,rgba(73,215,255,.09),transparent 32%),
+linear-gradient(180deg,#05070d,#07101a 55%,#05070d)}
+.grid{position:fixed;inset:0;z-index:-2;opacity:.18;background-image:
+linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:70px 70px;
+mask-image:linear-gradient(to bottom,black,transparent 90%)}
+.orb{position:absolute;width:420px;height:420px;border-radius:50%;filter:blur(55px);opacity:.12;animation:float 13s ease-in-out infinite}
+.orb.a{background:var(--gold);left:-150px;top:20vh}.orb.b{background:var(--cyan);right:-160px;top:55vh;animation-delay:-6s}
+@keyframes float{50%{transform:translate3d(50px,-35px,0) scale(1.08)}}
+nav{position:sticky;top:0;z-index:50;background:rgba(5,7,13,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:"Space Grotesk";font-weight:700;letter-spacing:.12em;font-size:21px}
+.logo span{color:var(--gold)}
+.navlinks{display:flex;gap:25px;color:var(--muted);font-size:14px}
+.navlinks a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;border-radius:12px;font-weight:700;border:1px solid rgba(245,189,61,.35);background:linear-gradient(135deg,#ffd76a,#d99920);color:#101010;box-shadow:0 10px 35px rgba(245,189,61,.15);transition:.25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 15px 45px rgba(245,189,61,.25)}
+.btn.ghost{background:rgba(255,255,255,.025);color:var(--text);border-color:var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:rgba(245,189,61,.45)}
+.hero{min-height:720px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:55px;padding:90px 0 70px}
+.kicker{display:inline-flex;gap:9px;align-items:center;padding:8px 13px;border:1px solid rgba(245,189,61,.28);background:rgba(245,189,61,.07);border-radius:999px;color:var(--gold2);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green);animation:blink 1.8s infinite}
+@keyframes blink{50%{opacity:.35}}
+h1{font-family:"Space Grotesk";font-size:clamp(48px,6vw,82px);line-height:.98;letter-spacing:-.045em;margin:22px 0}
+.grad{background:linear-gradient(100deg,#fff,var(--gold2) 45%,var(--cyan));-webkit-background-clip:text;color:transparent}
+.hero p{font-size:18px;color:var(--muted);max-width:680px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0}
+.micro{font-size:12px;color:#a0adbe;max-width:650px}
+.robot-stage{height:520px;position:relative;display:grid;place-items:center;perspective:900px}
+.halo{position:absolute;width:390px;height:390px;border:1px solid rgba(245,189,61,.18);border-radius:50%;box-shadow:0 0 90px rgba(245,189,61,.08),inset 0 0 80px rgba(73,215,255,.04);animation:spin 18s linear infinite}
+.halo:before,.halo:after{content:"";position:absolute;inset:25px;border:1px dashed rgba(73,215,255,.18);border-radius:50%}
+.halo:after{inset:75px;border-color:rgba(245,189,61,.18)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.robot{width:225px;height:285px;border-radius:48px 48px 38px 38px;background:linear-gradient(145deg,#1b2433,#070a11);border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 60px rgba(73,215,255,.12);position:relative;animation:robot 5s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes robot{50%{transform:translateY(-18px) rotateY(-5deg)}}
+.robot:before{content:"";position:absolute;top:-35px;left:50%;width:2px;height:38px;background:var(--gold);transform:translateX(-50%);box-shadow:0 -5px 12px var(--gold)}
+.robot:after{content:"";position:absolute;top:-46px;left:50%;width:11px;height:11px;border-radius:50%;background:var(--gold2);transform:translateX(-50%);box-shadow:0 0 22px var(--gold)}
+.face{position:absolute;inset:55px 28px auto;height:105px;border:1px solid rgba(73,215,255,.28);border-radius:25px;background:linear-gradient(180deg,#071522,#0a1019);display:flex;align-items:center;justify-content:center;gap:28px;box-shadow:inset 0 0 30px rgba(73,215,255,.08)}
+.eye{width:38px;height:13px;border-radius:20px;background:var(--cyan);box-shadow:0 0 20px var(--cyan);animation:scan 2.2s infinite}
+@keyframes scan{50%{transform:scaleX(.55);opacity:.6}}
+.chest{position:absolute;left:38px;right:38px;bottom:35px;height:70px;border:1px solid rgba(245,189,61,.3);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.025)}
+.chest b{color:var(--gold2);font-size:12px;letter-spacing:.16em}.chest span{font-size:10px;color:var(--muted);margin-top:5px}
+.float-card{position:absolute;background:rgba(9,14,24,.88);backdrop-filter:blur(15px);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 18px 50px rgba(0,0,0,.35);animation:cardfloat 5s ease-in-out infinite}
+.fc1{top:55px;right:0}.fc2{bottom:75px;left:0;animation-delay:-2s}
+.float-card small{color:var(--muted);display:block;font-size:10px}.float-card strong{font-family:"Space Grotesk";font-size:19px}
+.green{color:var(--green)}.gold{color:var(--gold2)}
+@keyframes cardfloat{50%{transform:translateY(-9px)}}
+.section{padding:95px 0}.eyebrow{text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-size:11px;font-weight:800;margin-bottom:10px}
+.section-head{max-width:720px;margin-bottom:45px}.section-head h2{font-family:"Space Grotesk";font-size:clamp(34px,4vw,54px);line-height:1.05;letter-spacing:-.035em;margin-bottom:14px}.section-head p{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:linear-gradient(145deg,rgba(18,25,38,.88),rgba(7,11,18,.9));border:1px solid var(--line);border-radius:20px;padding:26px;transition:.3s}
+.card:hover{transform:translateY(-5px);border-color:rgba(245,189,61,.28)}
+.stat b{font-family:"Space Grotesk";font-size:35px}.stat span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.notice{margin-top:18px;padding:15px 18px;border-left:3px solid var(--gold);background:rgba(245,189,61,.045);border-radius:10px;color:#c5cedb;font-size:13px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card h3{font-family:"Space Grotesk";font-size:21px;margin:13px 0 8px}.card p{color:#b4bfce;font-size:14px}
+.icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:rgba(245,189,61,.09);border:1px solid rgba(245,189,61,.18);font-size:21px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.option{position:relative;overflow:hidden}.option:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--gold);opacity:.045;right:-90px;top:-90px}
+.option.cyan:before{background:var(--cyan)}
+.option-tag{display:inline-block;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.1em;background:rgba(245,189,61,.1);color:var(--gold2)}
+.option.cyan .option-tag{background:rgba(73,215,255,.1);color:#8be7ff}
+.option ul{list-style:none;margin:20px 0}.option li{padding:8px 0;color:#c4ccda;font-size:14px}.option li:before{content:"✓";color:var(--green);font-weight:800;margin-right:9px}
+.price{font-family:"Space Grotesk";font-size:29px;color:var(--gold2);margin-top:15px}.subprice{font-size:13px;color:var(--muted)}
+.comparison{overflow:auto}.comparison table{width:100%;border-collapse:collapse;min-width:760px}.comparison th,.comparison td{padding:15px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}.comparison th{color:var(--gold2);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step-num{font-family:"Space Grotesk";font-size:13px;color:var(--gold);letter-spacing:.12em}
+.risk{border:1px solid rgba(255,141,141,.18);background:rgba(255,141,141,.035);border-radius:18px;padding:26px}.risk h3{color:#ffd0d0;margin-bottom:8px}.risk p,.risk li{color:#b9c3d3;font-size:14px}.risk ul{padding-left:20px;margin-top:12px}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:10px 0}.faq summary{cursor:pointer;font-weight:700}.faq p{color:#b4bfce;padding-top:12px;font-size:14px}
+.cta{padding:65px 25px;text-align:center;border:1px solid rgba(245,189,61,.25);background:radial-gradient(circle at center,rgba(245,189,61,.09),transparent 65%),var(--panel);border-radius:28px}.cta h2{font-family:"Space Grotesk";font-size:clamp(34px,4vw,54px);margin-bottom:12px}.cta p{color:var(--muted);max-width:650px;margin:0 auto 25px}
+footer{border-top:1px solid var(--line);padding:40px 0 60px;color:#7d889b;font-size:12px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}.footer-title{color:#dbe2ec;font-weight:700;margin-bottom:8px}.legal{margin-top:25px;padding-top:20px;border-top:1px solid var(--line);line-height:1.8}
+.reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}.reveal.show{opacity:1;transform:none}
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 32px;
-                line-height: 1.2;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .pricing-amount {
-                font-size: 32px;
-            }
-            
-            .container {
-                padding: 0 16px;
-            }
-            
-            .cta-section {
-                padding: 32px 16px;
-            }
-            
-            .hero-cta {
-                gap: 12px;
-            }
-            
-            .stats,
-            .features-grid,
-            .testimonials-grid,
-            .faq-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            
-            .steps {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            
-            img, video {
-                max-width: 100%;
-                height: auto;
-            }
-            
-            .cta-button {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-            
-            .secondary-button {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-            
-            .nav-content {
-                flex-direction: column;
-                gap: 16px;
-                align-items: center;
-            }
-            
-            .logo {
-                font-size: 22px;
-            }
-            
-            nav {
-                padding: 16px 0;
-            }
-            
-            .hero {
-                padding: 60px 0 40px;
-            }
-            
-            .section {
-                padding: 48px 0;
-            }
-            
-            .hero-subtitle {
-                font-size: 16px;
-            }
-            
-            .section-subtitle {
-                font-size: 15px;
-            }
-            
-            .feature-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-            }
-            
-            .feature-title {
-                font-size: 20px;
-            }
-            
-            .feature-description {
-                font-size: 14px;
-            }
-            
-            .stat-number {
-                font-size: 36px;
-            }
-            
-            .stat-label {
-                font-size: 14px;
-            }
-            
-            .step-number {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-            
-            .step-title {
-                font-size: 18px;
-            }
-            
-            .step-description {
-                font-size: 14px;
-            }
-            
-            .pricing-card {
-                padding: 32px 20px;
-            }
-            
-            .pricing-features {
-                font-size: 14px;
-            }
-            
-            .testimonial-text {
-                font-size: 14px;
-            }
-            
-            .faq-question {
-                font-size: 16px;
-            }
-            
-            .faq-answer {
-                font-size: 14px;
-            }
-            
-            footer {
-                padding: 32px 0;
-            }
-            
-            footer p {
-                font-size: 13px;
-            }
-        }
-        
-        /* Scroll reveal animation */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+/* Progressive reveal is opt-in. This prevents blank sections if a local-file preview delays JavaScript. */
+.js .reveal{opacity:0;transform:translateY(22px)}
+.js .reveal.show{opacity:1;transform:none}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:65px}.robot-stage{height:420px}.stats,.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.navlinks{display:none}}
+@media(max-width:650px){.container{width:min(var(--max),calc(100% - 26px))}.nav{height:68px}.logo{font-size:17px}.nav .btn{padding:10px 13px;font-size:12px}.hero{text-align:center}.hero p{font-size:16px}.actions{justify-content:center}.hero{min-height:auto}.robot-stage{height:340px;margin-top:10px}.halo{width:270px;height:270px}.robot{width:180px;height:230px}.face{inset:45px 22px auto;height:80px}.eye{width:28px}.fc1{right:-2px;top:30px}.fc2{left:-2px;bottom:45px}.stats,.grid3,.options,.steps,.footer-grid{grid-template-columns:1fr}.section{padding:68px 0}.card{padding:21px}.section-head{margin-bottom:30px}.cta{padding:45px 18px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">AUREX WEALTH CIRCLE</div>
-                <a href="#join" class="cta-button">Get Started</a>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-badge">💎 Elite Forex Trading Community</div>
-            <h1>
-                Earn While You<br>
-                <span class="gradient-text">Master The Markets</span>
-            </h1>
-            <p class="hero-subtitle">
-                Join the Aurex Wealth Circle: Where our proven trading bot generates 3-10% monthly returns while you learn professional SMC strategies from beginner to expert.
-            </p>
-            <div class="hero-cta">
-                <a href="#join" class="cta-button">Join The Wealth Circle</a>
-                <a href="#how-it-works" class="secondary-button">See What's Inside</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Stats Section -->
-    <section>
-        <div class="container">
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">3-10%</div>
-                    <div class="stat-label">Monthly Returns (Bot)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Hours of SMC Content</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1-on-1</div>
-                    <div class="stat-label">Mentorship Calls</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Community Access</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">What Makes Us Different</h2>
-                <p class="section-subtitle">We don't just give you signals—we build profitable traders while your account grows</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3 class="feature-title">Proven Trading Bot</h3>
-                    <p class="feature-description">Our proprietary algorithm delivers consistent 3-10% monthly returns with only 10% max drawdown. Your account earns while you learn—true passive income.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3 class="feature-title">Complete SMC Curriculum</h3>
-                    <p class="feature-description">From absolute beginner to professional trader. Learn Order Blocks, Fair Value Gaps, Market Structure, Liquidity Concepts, and advanced ICT methodologies step-by-step.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">Live Trading Sessions</h3>
-                    <p class="feature-description">Watch MhaeyzFx analyze and execute real trades in live sessions. See exactly how professionals think, plan, and manage positions during London and New York sessions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍🏫</div>
-                    <h3 class="feature-title">1-on-1 Mentorship</h3>
-                    <p class="feature-description">Direct access to personalized coaching calls. Get your charts reviewed, questions answered, and custom guidance based on your skill level and trading goals.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Daily Market Analysis</h3>
-                    <p class="feature-description">Morning breakdown of key levels, session bias, and high-probability setups. Learn to read the market like a professional with our daily insights and trade ideas.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3 class="feature-title">Elite Trading Community</h3>
-                    <p class="feature-description">Connect with serious, like-minded traders in our private Discord. Share ideas, celebrate wins, learn from losses, and grow together in a supportive environment.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- How It Works -->
-    <section class="section" id="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Your Journey in The Wealth Circle</h2>
-                <p class="section-subtitle">Earn from day one while building skills that last a lifetime</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Join & Connect Bot</h3>
-                    <p class="step-description">Open your Tickmill account, connect to our proven trading bot, and start earning 3-10% monthly while you learn the foundations of SMC.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Master SMC Concepts</h3>
-                    <p class="step-description">Progress through our structured curriculum: Market Structure → Liquidity → Order Blocks → Fair Value Gaps → Advanced ICT strategies at your own pace.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Become Independent</h3>
-                    <p class="step-description">Graduate from copying our bot to confidently executing your own high-probability setups. Trade manually or keep the bot running—your choice.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Pricing Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Wealth Circle Membership</h2>
-                <p class="section-subtitle">Everything you need to earn and learn—all included for one simple price</p>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-badge">COMPLETE PACKAGE</div>
-                <div class="pricing-amount">$20</div>
-                <div class="pricing-period">per month</div>
-                <p style="margin: 20px 0; font-size: 18px; color: var(--gray);">
-                    <strong style="color: var(--primary);">Earn While You Learn:</strong> Bot generates returns while you master the markets
-                </p>
-                <ul class="pricing-features">
-                    <li><strong>Trading Bot Access</strong> – 3-10% monthly returns, 24/5 automation</li>
-                    <li><strong>Complete SMC Curriculum</strong> – Beginner to professional pathway</li>
-                    <li><strong>Video Course Library</strong> – 100+ hours of structured content</li>
-                    <li><strong>Live Trading Sessions</strong> – Watch real-time analysis & execution</li>
-                    <li><strong>1-on-1 Mentorship Calls</strong> – Personal chart reviews & guidance</li>
-                    <li><strong>Daily Market Breakdowns</strong> – Morning bias, key levels, setups</li>
-                    <li><strong>Private Discord Community</strong> – Network with serious traders</li>
-                    <li><strong>Trade Idea Channels</strong> – High-probability setups daily</li>
-                    <li><strong>Weekly Group Coaching</strong> – Live Q&A and strategy sessions</li>
-                    <li><strong>Lifetime Updates</strong> – New content, strategies, bot upgrades</li>
-                </ul>
-                <a href="#join" class="cta-button" style="width: 100%; display: block; margin-top: 24px;">Join The Wealth Circle →</a>
-                <p style="margin-top: 20px; font-size: 14px; color: var(--gray);">
-                    <strong>What You Need:</strong> Tickmill broker account with minimum $500 capital.<br>
-                    Cancel anytime. No contracts. No hidden fees.
-                </p>
-            </div>
-            <div style="text-align: center; margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
-                <p style="font-size: 16px; color: var(--gray); line-height: 1.8;">
-                    <strong style="color: var(--light);">The Math:</strong> If our bot delivers just 5% monthly on a $1,000 account, that's $50/month in passive returns—covering your membership 2.5x over. Meanwhile, the SMC education you receive is valued at $500+ if purchased separately. You're literally being paid to learn a skill that can generate income for life.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Success Stories</h2>
-                <p class="section-subtitle">Real members earning and learning in the Aurex Wealth Circle</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial">
-                    <p class="testimonial-text">"I joined as a complete beginner. The bot covered my membership fees from month one while I learned SMC. Six months later, I'm taking my own trades confidently. This is the best investment I've made in myself."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">CJ</div>
-                        <div>
-                            <div class="testimonial-name">Chidi Johnson</div>
-                            <div class="testimonial-role">Member since Aug 2024</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"The 1-on-1 calls with MhaeyzFx are game-changing. He reviewed my charts, corrected my mistakes, and now I'm consistently profitable. Plus the bot keeps generating passive income. Unbeatable value."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">AO</div>
-                        <div>
-                            <div class="testimonial-name">Amara Okafor</div>
-                            <div class="testimonial-role">Member since Sep 2024</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"I've tried other courses and signal groups. Nothing compares to having a proven bot earning while you study structured SMC content. The daily analysis and live sessions make everything click. This is how trading should be taught."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">TM</div>
-                        <div>
-                            <div class="testimonial-name">Tunde Musa</div>
-                            <div class="testimonial-role">Member since Oct 2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQ -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">What exactly is the Aurex Wealth Circle?</div>
-                    <div class="faq-answer">It's a premium forex education community where you earn while you learn. Our proven trading bot generates 3-10% monthly returns on your account while you master Smart Money Concepts (SMC) through structured courses, live sessions, 1-on-1 mentorship, and daily market analysis. You get both passive income and a valuable skillset.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Do I need trading experience to join?</div>
-                    <div class="faq-answer">Absolutely not! We take complete beginners and guide them from zero to professional trader. The bot handles your account profitably from day one while you learn at your own pace. Our curriculum is designed for all levels—whether you've never opened a chart or already have some experience.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How does "earn while you learn" actually work?</div>
-                    <div class="faq-answer">Simple: You connect our trading bot to your Tickmill account. It trades automatically 24/5, targeting 3-10% monthly returns with conservative risk management (10% max drawdown tested). While the bot earns, you study our SMC curriculum, attend live sessions, and get mentorship. Your account grows while you build skills to eventually trade independently.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What's included in the $20/month membership?</div>
-                    <div class="faq-answer">Everything: Full bot access, complete SMC video curriculum (100+ hours), live trading sessions with MhaeyzFx, 1-on-1 mentorship calls, daily market analysis, trade ideas, private Discord community, weekly group coaching, and all future updates. It's a complete trading education + passive income system for less than a Netflix subscription.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Can I really make money from the bot while learning?</div>
-                    <div class="faq-answer">Yes. Our bot has been tested for months with consistent 3-10% monthly returns and only 10% max drawdown. On a $1,000 account at 5% monthly, that's $50 passive income—2.5x your membership cost. However, forex involves risk. Past performance doesn't guarantee future results, but our track record speaks for itself.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What happens after I master SMC trading?</div>
-                    <div class="faq-answer">You have options: Keep the bot running for passive income while trading your own setups, turn off the bot and trade 100% manually with your new skills, or do both. Many members graduate to independent trading but keep the bot as a backup income stream. The choice is yours—you own the skill forever.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Final CTA -->
-    <section id="join">
-        <div class="container">
-            <div class="cta-section">
-                <h2>Ready to Earn While You Learn?</h2>
-                <p>Join the Aurex Wealth Circle and start building wealth AND skills today</p>
-                <a href="https://whatsapp.com/channel/0029VbB8Mv20AgWG04TYdK1P" class="cta-button" style="font-size: 18px; padding: 18px 40px;">Join The Wealth Circle →</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 Aurex Wealth Circle. All rights reserved. Forex trading involves substantial risk. Only invest what you can afford to lose.</p>
-            <p style="margin-top: 12px; font-size: 13px;">Powered by MhaeyzFx | Smart Money Concepts Education + Automated Trading</p>
-        </div>
-    </footer>
+<div class="bg"><div class="grid"></div><div class="orb a"></div><div class="orb b"></div></div>
+
+<nav>
+  <div class="container nav">
+    <a class="logo" href="#top"><span>▲</span> AUREX LLC</a>
+    <div class="navlinks">
+      <a href="#system">System</a><a href="#options">Options</a><a href="#risk">Risk</a><a href="#faq">FAQ</a>
+    </div>
+    <a class="btn" href="#join">Explore AUREX</a>
+  </div>
+</nav>
+
+<main id="top">
+<section class="hero container">
+  <div>
+    <div class="kicker"><span class="dot"></span> Automated Trading • Technology • Education</div>
+    <h1>Meet the <span class="grad">AUREX Wealth Circle.</span></h1>
+    <p>A technology and education ecosystem built around systematic forex trading. Use automation, access a strategy, understand the numbers and keep control of your own broker account.</p>
+    <div class="actions">
+      <a class="btn" href="#options">See How It Works →</a>
+      <a class="btn ghost" href="#risk">Read the Risk Disclosure</a>
+    </div>
+    <p class="micro">AUREX does not promise profits or guarantee returns. Forex/CFD trading can result in substantial losses. Historical results are not a forecast of future performance.</p>
+  </div>
+  <div class="robot-stage" aria-label="AUREX automated trading technology visual">
+    <div class="halo"></div>
+    <div class="robot">
+      <div class="face"><div class="eye"></div><div class="eye"></div></div>
+      <div class="chest"><b>AUREX CORE</b><span>SYSTEMATIC EXECUTION</span></div>
+    </div>
+    <div class="float-card fc1"><small>TRACK RECORD*</small><strong class="green">+91.39%</strong><small>Historical account gain</small></div>
+    <div class="float-card fc2"><small>MAX DRAWDOWN*</small><strong class="gold">16.9%</strong><small>Historical Myfxbook figure</small></div>
+  </div>
+</section>
+
+<section class="section" id="system">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">The concept</div><h2>Automation should make the process more systematic — not make risk disappear.</h2><p>AUREX combines automated execution, strategy access, technical setup and education. The goal is transparency: you should understand what the system does, where your money is held, and what can go wrong.</p></div>
+  <div class="stats reveal">
+    <div class="card stat"><b>1,906</b><span>Historical trades shown on the referenced Myfxbook account*</span></div>
+    <div class="card stat"><b>2.01</b><span>Historical profit factor*</span></div>
+    <div class="card stat"><b>68.5%</b><span>Approx. combined winning-trade rate from displayed history*</span></div>
+    <div class="card stat"><b>$5,000</b><span>Historical starting deposit shown on Myfxbook*</span></div>
+  </div>
+  <div class="notice">*Historical figures displayed for the AUREX Digital 5K Auto Trading Myfxbook record at the time this page was prepared. They are not guaranteed results and may change as the account continues trading. The Myfxbook page is the source of record.</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">What AUREX provides</div><h2>Technology, access and support — clearly separated from your trading capital.</h2></div>
+  <div class="grid3">
+    <div class="card reveal"><div class="icon">🤖</div><h3>AUREX Quant Bot</h3><p>An automated trading system configured to execute its programmed strategy on a compatible trading account. Automation does not remove market risk.</p></div>
+    <div class="card reveal"><div class="icon">🔐</div><h3>Your Broker Account</h3><p>For the setup model, your trading funds remain with your chosen broker. AUREX does not require you to send trading capital to AUREX in order to use the system.</p></div>
+    <div class="card reveal"><div class="icon">📡</div><h3>Strategy Copier</h3><p>Where supported, a client may connect their own broker account to the AUREX strategy through the broker/platform’s copy-trading infrastructure.</p></div>
+    <div class="card reveal"><div class="icon">🛠️</div><h3>Technical Setup</h3><p>We can assist with platform configuration, EA installation, VPS configuration and technical troubleshooting.</p></div>
+    <div class="card reveal"><div class="icon">📚</div><h3>Education</h3><p>Learn trading concepts, risk management, market structure and how automated systems work. Education is not a promise of trading success.</p></div>
+    <div class="card reveal"><div class="icon">📊</div><h3>Transparency</h3><p>Where a verified third-party track record is referenced, we distinguish historical performance from future expectations and disclose drawdown information.</p></div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="options">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">Two ways to access AUREX</div><h2>Choose the structure that fits your account and experience.</h2><p>Both models are designed around client-controlled trading accounts. Fees below are service fees, not deposits into an investment pool.</p></div>
+  <div class="options">
+    <div class="card option reveal">
+      <span class="option-tag">OPTION 01 • AUREX QUANT BOT</span>
+      <h3>Run the system on your own trading account.</h3>
+      <p>Purchase access to the automated system and receive technical assistance with setup and ongoing support.</p>
+      <ul>
+        <li>EA/bot access and licensing</li>
+        <li>Initial installation and configuration</li>
+        <li>VPS setup</li>
+        <li>VPS maintenance & technical support</li>
+        <li>Trading remains on your own broker account</li>
+        <li>Account activity and trades remain visible to you</li>
+      </ul>
+      <div class="price">₦200,000 <span class="subprice">one-time setup & bot access</span></div>
+      <div class="price">₦15,000 <span class="subprice">monthly VPS maintenance & support</span></div>
+      <a class="btn" style="margin-top:20px" href="#join">Ask About Bot Setup</a>
+    </div>
+    <div class="card option cyan reveal">
+      <span class="option-tag">OPTION 02 • AUREX STRATEGY COPIER</span>
+      <h3>Connect to the AUREX strategy through a supported copy platform.</h3>
+      <p>You maintain your own supported broker account and choose your copy exposure/multiplier. Trades are copied through the platform according to its settings and terms.</p>
+      <ul>
+        <li>Open and fund your own supported broker account</li>
+        <li>Connect to the AUREX strategy</li>
+        <li>Choose your own exposure/multiplier</li>
+        <li>Copied trades remain visible in your account</li>
+        <li>Your trading funds remain with the broker</li>
+        <li>Any platform performance-sharing arrangement is governed by the platform's terms</li>
+      </ul>
+      <div class="price">Platform-based</div>
+      <div class="subprice">No transfer of your trading capital to AUREX is required for this model.</div>
+      <a class="btn ghost" style="margin-top:20px" href="#join">Ask About Strategy Access</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">How it works</div><h2>From setup to live execution.</h2></div>
+  <div class="steps">
+    <div class="card reveal"><div class="step-num">01 / ACCOUNT</div><h3>Choose your broker</h3><p>Open a compatible account in your own name and understand the broker's fees, leverage, margin rules and withdrawal conditions.</p></div>
+    <div class="card reveal"><div class="step-num">02 / CONFIGURE</div><h3>Set up the system</h3><p>AUREX helps configure the EA/VPS or guides you through the supported strategy-copy connection.</p></div>
+    <div class="card reveal"><div class="step-num">03 / CONTROL</div><h3>Choose exposure</h3><p>Set position sizing or copy multiplier according to your own risk tolerance. Higher exposure can increase both gains and losses.</p></div>
+    <div class="card reveal"><div class="step-num">04 / MONITOR</div><h3>Review the account</h3><p>Monitor balance, equity, open trades, margin and drawdown directly through your broker/platform. Automation is not a substitute for oversight.</p></div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">What the record shows</div><h2>Real numbers, with the context included.</h2><p>Based on the Myfxbook record supplied for AUREX Digital 5K Auto Trading.</p></div>
+  <div class="comparison card reveal">
+    <table>
+      <thead><tr><th>Metric</th><th>Displayed historical value</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Starting deposit</td><td>$5,000</td><td>Capital deposited on the tracked account</td></tr>
+        <tr><td>Balance</td><td>$9,569.76</td><td>Account balance at the displayed update</td></tr>
+        <tr><td>Gain</td><td>+91.39%</td><td>Historical account gain shown by Myfxbook</td></tr>
+        <tr><td>Profit</td><td>$4,569.76</td><td>Historical closed-profit figure shown</td></tr>
+        <tr><td>Drawdown</td><td>16.9%</td><td>Historical drawdown shown; not a maximum future-loss guarantee</td></tr>
+        <tr><td>Profit factor</td><td>2.01</td><td>Historical gross-profit / gross-loss ratio</td></tr>
+        <tr><td>Total trades</td><td>1,906</td><td>Number of trades displayed in the record</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice">The figures above are historical account statistics, not promises, targets or forecasts. Live results can differ because of spreads, slippage, execution, broker conditions, account size, leverage, settings and market conditions.</div>
+</div>
+</section>
+
+<section class="section" id="risk">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">Risk & compliance information</div><h2>Read this before you join.</h2></div>
+  <div class="risk reveal">
+    <h3>Important risk disclosure</h3>
+    <p>Forex and CFD trading is speculative and involves significant risk of loss. Automated execution can increase consistency of execution, but it cannot eliminate market risk, drawdown, slippage, spread costs, gaps, liquidity risk, broker risk or technical failure.</p>
+    <ul>
+      <li>Past performance does not guarantee future results.</li>
+      <li>No monthly return, profit, win rate or drawdown level is guaranteed.</li>
+      <li>Do not trade with money you cannot afford to lose.</li>
+      <li>Do not increase leverage or copy exposure solely because historical results were positive.</li>
+      <li>Historical drawdown is not a promise of the maximum future drawdown.</li>
+      <li>Performance can differ between the master/track-record account and a client's account because of execution, spread, slippage, timing, leverage, account size and settings.</li>
+      <li>AUREX does not represent that use of an EA or copy strategy is suitable for every person.</li>
+    </ul>
+  </div>
+  <div class="card reveal" style="margin-top:18px">
+    <h3>Regulatory positioning</h3>
+    <p>AUREX LLC presents this website as a technology, automated-trading and education service. It does not describe client payments to AUREX as deposits, pooled investment capital or guaranteed-return investments. AUREX should not be represented as an SEC-registered investment adviser, fund manager, broker, robo-adviser or other regulated capital-market operator unless and until the applicable registration/authorization has been confirmed.</p>
+    <p style="margin-top:12px">Nigeria's SEC published proposed rules on online forex trading and CFDs on September 1, 2026. Those proposals expressly contemplate technology/platform providers and other persons offering online forex services to Nigerian residents. The SEC has also warned that only registered entities may promote investment services, provide investment advisory services or solicit funds from the public in the Nigerian capital market. The exact regulatory classification of a particular AUREX service depends on how it is operated, marketed and delivered.</p>
+    <p style="margin-top:12px">Before launching or materially expanding any service involving investment advice, discretionary trading, performance fees, public solicitation or client asset management, obtain Nigerian regulatory/legal advice and confirm the applicable SEC requirements. This webpage is not a legal opinion.</p>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <div class="section-head reveal"><div class="eyebrow">Frequently asked</div><h2>Clear answers before you decide.</h2></div>
+  <div class="faq">
+    <details class="reveal"><summary>Do I send my trading money to AUREX?</summary><p>No. Under the client-account setup and strategy-copy structures described here, trading capital is held in the client's own broker account. AUREX service fees are separate from trading capital.</p></details>
+    <details class="reveal"><summary>Does the bot guarantee profit?</summary><p>No. There is no guaranteed return. The system automates a programmed trading strategy; market conditions can produce profits or losses.</p></details>
+    <details class="reveal"><summary>Can I see the trades?</summary><p>Yes. With the own-account setup, trades are visible through the client's trading platform. With supported copy trading, copied positions appear in the client's broker/platform account subject to the platform's execution and settings.</p></details>
+    <details class="reveal"><summary>Do I need to be a Forex expert?</summary><p>No, but you should understand the basic risks of leveraged forex/CFD trading. AUREX can provide education and technical guidance, but automation does not replace your responsibility to understand the account you are using.</p></details>
+    <details class="reveal"><summary>What is the Myfxbook page?</summary><p>It is a third-party tracking page used to display historical account statistics. It is evidence of a particular account's recorded history, not a promise that another account will achieve the same result.</p></details>
+    <details class="reveal"><summary>Can I stop the bot or copying?</summary><p>Yes, subject to the broker/platform's controls and any applicable open-position considerations. Clients remain responsible for monitoring their account and deciding whether to continue using the system.</p></details>
+    <details class="reveal"><summary>What fees do I pay?</summary><p>For the AUREX Quant Bot setup shown on this page: ₦200,000 one-time setup and bot access, plus ₦15,000 monthly VPS maintenance and technical support. Strategy-copy costs and any performance-sharing arrangements are determined by the relevant platform's current terms.</p></details>
+  </div>
+</div>
+</section>
+
+<section class="section" id="join">
+<div class="container">
+  <div class="cta reveal">
+    <div class="eyebrow">Start with information</div>
+    <h2>Understand the system. Choose your structure.</h2>
+    <p>Message AUREX to discuss bot setup or supported strategy-copy access. We will explain the setup, costs, account requirements and risks before you decide.</p>
+    <div class="actions" style="justify-content:center;margin-bottom:0">
+      <a class="btn" href="https://whatsapp.com/channel/0029VbB8Mv20AgWG04TYdK1P" target="_blank" rel="noopener">WhatsApp AUREX →</a>
+      <a class="btn ghost" href="https://www.myfxbook.com/members/Popomhaey/aurex-digital-5k-auto-trading/11819660/Nn3DgXrYZlM8wlUYza79" target="_blank" rel="noopener">View Track Record</a>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container">
+  <div class="footer-grid">
+    <div><div class="footer-title">AUREX LLC</div><div>Automated Trading • Technology • Education</div></div>
+    <div><div class="footer-title">Important</div><div>No guaranteed returns. No promise of profit. Trading involves significant risk.</div></div>
+    <div><div class="footer-title">Information</div><div>This website is informational and does not constitute a legal, tax or investment recommendation.</div></div>
+  </div>
+  <div class="legal">
+    © 2026 AUREX LLC. All rights reserved. The term “Wealth Circle” is a brand/community name and does not by itself mean that AUREX operates a pooled investment fund. Any regulated service will be subject to the applicable laws, platform terms and required authorisations. Users should independently verify broker and regulatory information before committing funds.
+  </div>
+</div>
+</footer>
+
+<script>
+document.documentElement.classList.add("js");
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>
